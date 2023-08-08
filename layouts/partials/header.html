@@ -1,0 +1,28 @@
+<div id="preloader"></div>
+
+<header aria-label="header">
+
+    <nav class="navbar px-md-0 navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+	    <div class="container">
+	      <a class="navbar-brand" href="/">Legalcare <span>A Law Firm Agency</span></a>
+	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+	        <span class="oi oi-menu"></span> Menu
+	      </button>
+
+	      <div class="collapse navbar-collapse" id="ftco-nav">
+	        <ul class="navbar-nav ml-auto">
+                {{ $currentPage := . }}
+                {{ range .Site.Menus.main }}
+                {{- $menu_item_url := (cond (strings.HasSuffix .URL "/") .URL (printf "%s/" .URL) ) | absLangURL }}
+                {{- $page_url:= $currentPage.Permalink | absLangURL }}
+                {{ $menuItem := . }}
+
+                <li class='nav-item{{ if eq $menuItem.URL $currentPage.RelPermalink }} active{{ end }}'> <a title="{{ .Name }}" class="nav-link" href="{{ .URL }}">{{ .Name }}</a> </li>
+                {{ end }} 
+	          
+	          <li class="nav-item cta"><a href="#" class="nav-link">Free Consultation</a></li>
+	        </ul>
+	      </div>
+	    </div>
+	  </nav>
+</header>

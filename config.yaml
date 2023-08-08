@@ -1,0 +1,61 @@
+baseURL:
+languageCode: en-us
+title: Legal Care
+taxonomies:
+  category: categories
+  section_category: section_categories
+enableRobotsTXT: true
+paginate: 1
+params:
+  twitter_user: kris_ray
+  twitter_link: https://twitter.com/
+  facebook_link: http://www.facebook.com/
+  instagram_link: https://www.instagram.com/
+  #google_analytics: UA-
+  paid_for: Paid for by Language - Kristopher Ray Creative
+  form_endpoint: 123456
+markup:
+  goldmark:
+    extensions:
+      definitionList: true
+      footnote: true
+      linkify: true
+      linkifyProtocol: https
+      strikethrough: true
+      table: true
+      taskList: true
+      typographer: true
+    parser:
+      attribute:
+        block: true
+        title: true
+      autoHeadingID: true
+      autoHeadingIDType: github
+      wrapStandAloneImageWithinParagraph: false
+    renderer:
+      hardWraps: false
+      unsafe: true
+      xhtml: false
+menu:
+  main:
+    - name: Home
+      url: /
+      weight: -20
+    - name: About
+      url: /about/
+      weight: -10
+    - name: Attorneys
+      url: /attorneys/
+      weight: -9
+    - name: Practice Areas
+      url: /practice-areas/
+      weight: -8
+    - name: Case Studies
+      url: /case-studies/
+      weight: -7
+    - name: Blog
+      url: /blog/
+      weight: -6
+    - name: Contact
+      url: /contact/
+      weight: -5
