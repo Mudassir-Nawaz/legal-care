@@ -5,6 +5,7 @@ desc: "A small river named Duden flows by their place and supplies it with the n
 day: 11
 year: 2020
 month: October
+thumbnail: "/images/image_5.jpg"
 ---
 
 <img src="/images/image_5.jpg"> <br>

@@ -3,7 +3,7 @@
 <header aria-label="header">
 
     <nav class="navbar px-md-0 navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
-	    <div class="container">
+	    <div class="container" style="max-width: 1220px !important;">
 	      <a class="navbar-brand" href="/">Legalcare <span>A Law Firm Agency</span></a>
 	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
 	        <span class="oi oi-menu"></span> Menu
@@ -16,10 +16,25 @@
                 {{- $menu_item_url := (cond (strings.HasSuffix .URL "/") .URL (printf "%s/" .URL) ) | absLangURL }}
                 {{- $page_url:= $currentPage.Permalink | absLangURL }}
                 {{ $menuItem := . }}
+				{{ $pageURL:= $currentPage.Permalink | absLangURL }}
 
+				{{ if .HasChildren }}
+				<li class="nav-item dropdown">
+					<span class="nav-link dropdown-toggle">{{.Name}}</span>
+					<div class="dropdown-menu" style="margin: 0 auto;">
+					{{ range .Children }}
+					{{ $childURL := .URL | absLangURL }}
+					{{ $active := eq $childURL $pageURL }}
+					<a href="{{if findRE `^#` .URL}}{{if not $.IsHome}}{{site.BaseURL | relLangURL}}{{end}}{{ .URL }}{{else}}{{.URL | relLangURL}}{{end}}"
+						class="nav__link{{ if $active }} active-link{{ end }}" style="text-align: center; display: block;">{{ .Name }}</a>
+					{{ end }}
+					</div>
+				</li>
+
+				{{ else }}
                 <li class='nav-item{{ if eq $menuItem.URL $currentPage.RelPermalink }} active{{ end }}'> <a title="{{ .Name }}" class="nav-link" href="{{ .URL }}">{{ .Name }}</a> </li>
+				{{end}}
                 {{ end }} 
-	          
 	          <li class="nav-item cta"><a href="#" class="nav-link">Free Consultation</a></li>
 	        </ul>
 	      </div>

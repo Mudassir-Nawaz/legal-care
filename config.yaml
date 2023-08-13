@@ -3,9 +3,10 @@ languageCode: en-us
 title: Legal Care
 taxonomies:
   category: categories
-  section_category: section_categories
+  tag: tags
 enableRobotsTXT: true
-paginate: 1
+paginate: 4  # Number of items per page
+paginatePath: "page"  # URL path for paginated pages (e.g., /page/2/)
 params:
   twitter_user: kris_ray
   twitter_link: https://twitter.com/
@@ -59,3 +60,19 @@ menu:
     - name: Contact
       url: /contact/
       weight: -5
+    - name: Dropdown
+      weight: -4
+      hasChildren: true
+    - name: Dropdown Item 1
+      url: #
+      weight: 1
+      parent: Dropdown
+    - name: Dropdown Item 2
+      url: #
+      weight: 1
+      parent: Dropdown
+    - name: Dropdown Item 3
+      url: #
+      weight: 1
+      parent: Dropdown
+    

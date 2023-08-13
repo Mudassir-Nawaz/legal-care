@@ -1,0 +1,52 @@
+
+<div class="article__head">
+  
+
+  {{ if .context.Params.thumbnail }}
+  <a class="article__image" href="{{ .context.RelPermalink }}">
+    <img class="lazy" src="{{ .context.Params.thumbnail | absURL }}" alt="{{ .context.Title }}">
+  </a>
+  {{ end }}
+</div>
+
+<div class="article__content">
+
+  <div class="article__meta">
+    
+    <span class="article__date">•<time datetime="{{ .context.Date.Format "2006-01-02T15:04:05Z07:00" }}">{{ .context.Date.Format "2 Jan, 2006" }}</time></span>
+  </div>
+
+  <h2 class="article__title">
+    <a href="{{ .context.RelPermalink }}">{{ .context.Title }}</a>
+  </h2>
+
+  {{ if eq (.class) "article--big" }}
+  <p class="article__excerpt">{{ if .context.Description }}{{ .context.Description }}{{ else }}{{ truncate 250 .context.Summary | safeHTML }}{{ end }}</p>
+  {{ end }}
+
+
+</div>
+
+<div class="col-md-4 d-flex ftco-animate">
+  <div class="blog-entry justify-content-end">
+      <div class="text px-4 py-4">
+          <h3 class="heading mb-0"><a href="{{ .Permalink }}">{{ .context.Title }}</a></h3>
+      </div>
+  {{ if .context.Params.thumbnail }}
+  <a href="{{ .context.RelPermalink }}" class="block-20" style="background-image: url('{{ .context.Params.thumbnail | absURL }}');"></a>
+  {{ end }}
+  <div class="text p-4 float-right d-block">
+      <div class="topper d-flex align-items-center">
+          <div class="one py-2 pl-3 pr-1 align-self-stretch">
+              <span class="day">{{.Params.day}}</span>
+          </div>
+          <div class="two pl-0 pr-3 py-2 align-self-stretch">
+              <span class="yr">{{.Params.year}}</span>
+              <span class="mos">{{.Params.month}}</span>
+          </div>
+      </div>
+    <p>{{.Params.desc}}</p>
+    <p><a href="{{ .Permalink }}" class="btn btn-primary">Read more</a></p>
+  </div>
+  </div>
+</div>

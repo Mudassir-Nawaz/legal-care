@@ -1,48 +1,51 @@
 {{ partial "head.html" . }}
 
-<body {{ if isset .Params "id" }}id='{{ index .Params "id" }}'{{end}} class="list-default">
+<body id="home">
 
 {{ partial "header.html" . }}
 
-<section id="banner">
+<section class="hero-wrap hero-wrap-2" style="background-image: url('/images/bg_1.jpg');" data-stellar-background-ratio="0.5">
+    <div class="overlay"></div>
     <div class="container">
-
-        <div class="row">
-            <div class="col text-center">
-
-                <h2>{{ .Title | safeHTML }}</h2>
-                <p>{{ .Description | safeHTML }}</p>
-
-            </div>
+      <div class="row no-gutters slider-text align-items-end justify-content-center">
+        <div class="col-md-9 ftco-animate pb-5 text-center">
+          <h1 class="mb-3 bread">{{ humanize .Title}}<sup style="font-size: 20px;">{{ len .Pages }}</sup></h1>
         </div>
-
+      </div>
     </div>
+  </section>
+
+<section class="ftco-section bg-light">
+  <div class="container">
+    <div class="row d-flex">
+      {{ range .Data.Pages }}
+      <div class="col-md-4 d-flex ftco-animate">
+        <div class="blog-entry justify-content-end">
+            <div class="text px-4 py-4">
+                <h3 class="heading mb-0"><a href="{{ .Permalink }}">{{ .Title }}</a></h3>
+            </div>
+        {{ if .Params.thumbnail }}
+        <a href="{{ .RelPermalink }}" class="block-20" style="background-image: url('{{ .Params.thumbnail | absURL }}');"></a>
+        {{ end }}
+        <div class="text p-4 float-right d-block">
+            <div class="topper d-flex align-items-center">
+                <div class="one py-2 pl-3 pr-1 align-self-stretch">
+                    <span class="day">{{.Params.day}}</span>
+                </div>
+                <div class="two pl-0 pr-3 py-2 align-self-stretch">
+                    <span class="yr">{{.Params.year}}</span>
+                    <span class="mos">{{.Params.month}}</span>
+                </div>
+            </div>
+          <p>{{.Params.desc}}</p>
+          <p><a href="{{ .Permalink }}" class="btn btn-primary">Read more</a></p>
+        </div>
+        </div>
+      </div>
+      {{ end }}
+    </div>  
+  </div>
 </section>
-
-<main>
-
-    <div class="container">
-
-        <div id="page-content" class="row">
-            <div class="col">
-                {{ .Content }}
-            </div>
-        </div>
-
-        <div class="row">
-
-            {{ range (.Paginator 1).Pages }}
-
-                {{ partial "news-entry.html" . }}
-
-            {{ end }}
-
-        </div>
-
-    </div>
-
-</main>
-
 
 
 {{ partial "footer.html" . }}

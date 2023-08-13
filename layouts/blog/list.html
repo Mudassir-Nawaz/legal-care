@@ -10,7 +10,7 @@
       <div class="row no-gutters slider-text align-items-end justify-content-center">
         <div class="col-md-9 ftco-animate pb-5 text-center">
           <h1 class="mb-3 bread">Blog</h1>
-          <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home <i class="ion-ios-arrow-forward"></i></a></span> <span>Blog <i class="ion-ios-arrow-forward"></i></span></p>
+          <p class="breadcrumbs"><span class="mr-2"><a href="/">Home <i class="ion-ios-arrow-forward"></i></a></span> <span>Blog <i class="ion-ios-arrow-forward"></i></span></p>
         </div>
       </div>
     </div>
@@ -19,14 +19,14 @@
   <section class="ftco-section bg-light">
     <div class="container">
       <div class="row d-flex">
-        {{ range .Site.RegularPages }}
+        {{ range .Paginator.Pages }}
         <div class="col-md-4 d-flex ftco-animate">
             {{ if eq .Section "blog" }}
             <div class="blog-entry justify-content-end">
                 <div class="text px-4 py-4">
                     <h3 class="heading mb-0"><a href="{{ .Permalink }}">{{ .Title }}</a></h3>
                 </div>
-            <a href="blog-single.html" class="block-20" style="background-image: url('{{ .Params.thumb }}');"></a>
+            <a href="{{.Permalink}}" class="block-20" style="background-image: url('{{ .Params.thumb }}');"></a>
             <div class="text p-4 float-right d-block">
                 <div class="topper d-flex align-items-center">
                     <div class="one py-2 pl-3 pr-1 align-self-stretch">
@@ -49,13 +49,20 @@
         <div class="col text-center">
           <div class="block-27">
             <ul>
-              <li><a href="#">&lt;</a></li>
-              <li class="active"><span>1</span></li>
-              <li><a href="#">2</a></li>
-              <li><a href="#">3</a></li>
-              <li><a href="#">4</a></li>
-              <li><a href="#">5</a></li>
-              <li><a href="#">&gt;</a></li>
+              <!-- Pagination navigation -->
+              {{ if .Paginator.HasPrev }}
+              <li><a href="{{ .Paginator.Prev.URL }}">&lt;</a></li>
+              {{ end }}
+              {{ range .Paginator.Pagers }}
+              {{ if eq $.Paginator.PageNumber .PageNumber }}
+                <li class="active"><span>{{ .PageNumber }}</span></li>
+              {{ else }}
+                <li><a href="{{ .URL }}" class="">{{ .PageNumber }}</a></li>
+              {{ end }}
+              {{ end }}
+              {{ if .Paginator.HasNext }}
+              <li><a href="{{ .Paginator.Next.URL }}">&gt;</a></li>
+              {{ end }}
             </ul>
           </div>
         </div>
