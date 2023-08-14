@@ -90,7 +90,7 @@
 
             <div class="sidebar-box ftco-animate">
               <h3>Recent Blog</h3>
-              {{ range first 7 .Site.RegularPages }}
+              {{ range first 4 .Site.RegularPages.ByDate.Reverse }}
               {{ if eq .Section "blog" }}
                 <div class="block-21 mb-4 d-flex">
                   <a class="blog-img mr-4" style="background-image: url({{.Params.thumbnail}}); background-size: cover;"></a>

@@ -15,6 +15,21 @@ params:
   #google_analytics: UA-
   paid_for: Paid for by Language - Kristopher Ray Creative
   form_endpoint: 123456
+  menu:
+  - name: Dropdown
+    identifier: menu1
+    items:
+      - name: Option 1.1
+        url: 
+      - name: Option 1.2
+        url: 
+      - name: Submenu 1
+        identifier: submenu1
+        items:
+          - name: Sub-option 1.1
+            url: /sub-option-1.1
+          - name: Sub-option 1.2
+            url: /sub-option-1.2
 markup:
   goldmark:
     extensions:
@@ -60,19 +75,19 @@ menu:
     - name: Contact
       url: /contact/
       weight: -5
-    - name: Dropdown
-      weight: -4
-      hasChildren: true
-    - name: Dropdown Item 1
-      url: #
-      weight: 1
-      parent: Dropdown
-    - name: Dropdown Item 2
-      url: #
-      weight: 1
-      parent: Dropdown
-    - name: Dropdown Item 3
-      url: #
-      weight: 1
-      parent: Dropdown
+    # - name: Dropdown
+    #   weight: -4
+    #   hasChildren: true
+    # - name: Dropdown Item 1
+    #   url: #
+    #   weight: 1
+    #   parent: Dropdown
+    # - name: Dropdown Item 2
+    #   url: #
+    #   weight: 1
+    #   parent: Dropdown
+    # - name: Dropdown Item 3
+    #   url: #
+    #   weight: 1
+    #   parent: Dropdown
     

@@ -18,26 +18,71 @@
                 {{ $menuItem := . }}
 				{{ $pageURL:= $currentPage.Permalink | absLangURL }}
 
-				{{ if .HasChildren }}
-				<li class="nav-item dropdown">
-					<span class="nav-link dropdown-toggle">{{.Name}}</span>
-					<div class="dropdown-menu" style="margin: 0 auto;">
-					{{ range .Children }}
-					{{ $childURL := .URL | absLangURL }}
-					{{ $active := eq $childURL $pageURL }}
-					<a href="{{if findRE `^#` .URL}}{{if not $.IsHome}}{{site.BaseURL | relLangURL}}{{end}}{{ .URL }}{{else}}{{.URL | relLangURL}}{{end}}"
-						class="nav__link{{ if $active }} active-link{{ end }}" style="text-align: center; display: block;">{{ .Name }}</a>
-					{{ end }}
-					</div>
-				</li>
-
-				{{ else }}
                 <li class='nav-item{{ if eq $menuItem.URL $currentPage.RelPermalink }} active{{ end }}'> <a title="{{ .Name }}" class="nav-link" href="{{ .URL }}">{{ .Name }}</a> </li>
-				{{end}}
                 {{ end }} 
+                {{ range .Site.Params.menu }}
+                <li class="nav-item dropdown">
+                    <span class="nav-link">{{ .name }}</span>
+                    <ul class="dropdown-content">
+                    {{ range .items }}
+                        {{ if .items }}
+                        <li class="nav-item sub-dropdown">
+                            <span>{{ .name }}</span>
+                            <ul class="sub-dropdown-content">
+                            {{ range .items }}
+                                <li><a href="{{ .url }}">{{ .name }}</a></li>
+                            {{ end }}
+                            </ul>
+                        </li>
+                        {{ else }}
+                        <li><a href="{{ .url }}">{{ .name }}</a></li>
+                        {{ end }}
+                    {{ end }}
+                    </ul>
+                </li>
+                {{ end }}
 	          <li class="nav-item cta"><a href="#" class="nav-link">Free Consultation</a></li>
 	        </ul>
 	      </div>
 	    </div>
 	  </nav>
 </header>
+
+
+  <style>
+    /* Basic styling for the menu */
+    
+    
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #f9f9f9;
+      min-width: 160px;
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+      z-index: 1;
+    }
+    
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+    
+    .sub-dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #f9f9f9;
+      min-width: 160px;
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+      z-index: 1;
+      bottom: 0;
+      left: 100%;
+    }
+    
+    .sub-dropdown:hover .sub-dropdown-content {
+      display: block;
+      transition: .5s ease-in all;
+    }
+    .sub-dropdown-content:hover {
+        display: block;
+    }
+  </style>
